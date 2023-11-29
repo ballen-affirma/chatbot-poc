@@ -1,0 +1,3 @@
+[submodule "alorica-chatbot-demo"]
+	path = alorica-chatbot-demo
+	url = https://github.com/ballen-affirma/chatbot-poc-frontend.git
