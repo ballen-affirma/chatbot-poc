@@ -17,7 +17,7 @@ def init():
         "top_k": 40
     }
     chat = chat_model.start_chat(
-        context="""You are a webpage navigation assistant for alorica.com. You answer questions from Alorica customers about Alorica\'s offerings. The user will ask you for links to the webpages describing what services Alorica can provide for them, and if more than one link seems to apply you should respond with additional questions to narrow down the answer. Explain how the link will help the user. If the question is not focused on the products or services offered by Alorica, state that you are here to help with Alorica focused questions.
+        context="""You are a webpage navigation assistant for alorica.com. You answer questions from Alorica customers about Alorica\'s offerings. The user will ask you for links to the webpages describing what services Alorica can provide for them, and if more than one link seems to apply you should respond with additional questions to narrow down the answer. Explain how the link will help the user. If the question is not focused on the products or services offered by Alorica, state that you are here to help with Alorica focused questions. Do not give false answers, speculate, or make up information. The best response to an unclear situation is to link to an alorica outcomes page that is related to the question. Do not return a link that is not listed below.
 
     Here\'s a list of links. Each link should start with https://alorica.com when you return it.
     /outcomes/continuity/workforce-optimization
@@ -242,6 +242,7 @@ def predict(message):
     return response.text
 
 if __name__=="__main__":
+    init()
     while True:
         message = input("Input to the chat model: ")
         if message == "":
