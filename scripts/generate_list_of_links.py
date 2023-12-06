@@ -13,21 +13,17 @@ def parse_tree_into_list_of_links(tree):
         output_list.append(loc.text)
     return output_list
 
-def filter_links(links):
-    f1 = filter(lambda x: ("/news/" in x) == False, links)
-    f2 = filter(lambda x: ("/awards-recognition/" in x) == False, f1)
-    f3 = filter(lambda x: ("/insights/" in x) == False, f2)
-    return list(f3)
-
-def filter_links_news_only(links):
-    f1 = filter(lambda x: ("/news/" in x) == False, links)
-    return list(f1)
+def filter_links_with_substrings(substrings):
+    filtered = links
+    for substring in substrings:
+        filtered = [x for x in filtered if (substring in x) == False]
+    return list(filtered)
 
 if __name__ == "__main__":
     tree = read_to_elementtree()
     links = parse_tree_into_list_of_links(tree)
     
     # filter the links for news and awards. Done to shrink the context and fit within a limit
-    links = filter_links_news_only(links)
+    links = filter_links_with_substrings(["/news/", "/careers/", "/ja/", "/es/"])
     links = [x.split("https://alorica.com")[1] for x in links]
     print("\n".join(links))
